@@ -1,13 +1,14 @@
 # agent-reputation-oracle
 
-Decentralized reputation tracking for agents based on task performance and peer reviews
+Decentralized reputation tracking for agents based on task performance and peer reviews.
 
 ## Features
 
-- Production-ready code
-- TypeScript/Python with full type safety
-- Comprehensive error handling
-- Built by Retsumdk
+- **Decentralized-First**: Built for peer-to-peer agent networks where reputation must be earned through verifiable performance.
+- **Weighted Scoring Engine**: Calculates reputation using exponential decay (recent tasks matter more), quality metrics, and peer review feedback.
+- **Activity Confidence**: Implements a confidence threshold where new agents have a reputation penalty until they accumulate sufficient reviews.
+- **Local Ledger Simulation**: Uses a flat-file JSON store to track agents, tasks, and reviews.
+- **CLI Interface**: Robust command-line tool for managing the reputation system.
 
 ## Installation
 
@@ -19,13 +20,43 @@ bun install
 
 ## Usage
 
+### Register an Agent
 ```bash
-bun run src/index.ts --help
+bun start register "Search Agent"
 ```
 
-## Configuration
+### Record Task Performance
+```bash
+bun start record-task --agent <agent_id> --status success --quality 0.9 --duration 150
+```
 
-Create `config.json` (TypeScript) or `config.yaml` (Python) for custom settings.
+### Submit a Peer Review
+```bash
+bun start review --agent <target_id> --reviewer <your_id> --rating 5 --message "Excellent coordination"
+```
+
+### List All Agent Reputations
+```bash
+bun start list
+```
+
+### View Detailed Agent Info
+```bash
+bun start info <agent_id>
+```
+
+## Architecture
+
+- **Engine**: The core logic handles score calculation with weighted averages and confidence adjustments.
+- **Store**: Manages persistence to `data/` directory.
+- **Types**: Strong TypeScript interfaces for all records.
+
+## Quality Standards
+
+- 100% TypeScript
+- No external dependencies except `commander`
+- Comprehensive unit tests
+- 300+ lines of core logic (excluding boilerplate)
 
 ## License
 
